@@ -1,0 +1,40 @@
+-- a. Belirli Kolonları Seçme
+-- Çalışanların sadece FirstName, LastName ve Salary bilgilerini getiren sorgu
+SELECT FirstName, LastName, Salary
+FROM Employees;
+
+-- b. DISTINCT Komutu ile Tekrarları Önleme
+-- Çalışanların çalıştıkları departmanları benzersiz olarak listeleyen sorgu
+SELECT DISTINCT DepartmentName
+FROM Departments
+JOIN Employees ON Departments.DepartmentID = Employees.DepartmentID;
+
+-- c. Belirli Bir Departmana Ait Çalışanları Listeleme
+-- Sadece IT departmanında çalışanların bilgilerini getiren sorgu
+SELECT *
+FROM Employees
+WHERE DepartmentID = 1;
+
+-- d. Maaşa Göre Sıralama
+-- Çalışanları maaşlarına göre büyükten küçüğe sıralayan sorgu
+SELECT *
+FROM Employees
+ORDER BY Salary DESC;
+
+-- e. Kolonları Birleştirme (Concatenation)
+-- Çalışanların FirstName ve LastName alanlarını birleştirerek, tam adlarını içeren yeni bir kolon oluşturan sorgu
+SELECT CONCAT(FirstName, ' ', LastName) AS FullName
+FROM Employees;
+--Bu sorgu, Employees ve Departments tablolarını DepartmentID kolonları üzerinden birleştirerek,
+--her çalışanın bilgilerini (EmployeeID, FirstName, LastName, Age, Salary, JoinDate) ve
+--çalıştıkları departmanın ismini (DepartmentName) döndüren bir sonuç kümesi oluşturur.
+SELECT 
+    e.EmployeeID,
+    e.FirstName,
+    e.LastName,
+    e.Age,
+    e.Salary,
+    e.JoinDate,
+    d.DepartmentName
+FROM Employees e
+JOIN Departments d ON e.DepartmentID = d.DepartmentID;
